@@ -9,22 +9,26 @@ use DBI;
 my $dbh = DBI->connect('DBI:mysql:dietcontest', 'root', '') 
 	|| die "Could not connect to database: $DBI::errstr";
 
-my $sth=$dbh->prepare("select avatar,password from users");
+my $sth=$dbh->prepare("select email,password,avatar from users");
 $sth->execute();
-my %users;
-while(my($avatar,$password)=$sth->fetchrow_array){
-	$users{$avatar}=$password;
+my(%users,%avatars);
+
+while(my($email,$password,$avatar)=$sth->fetchrow_array){
+	$users{$email}=$password;
+	$avatars{$email}=$avatar;
 }
 
 print header;
 
 print start_form;
 
-print "<table><tr>";
-foreach my $avatar (keys %users){
-	print "<td><label><input type='radio' name='avatar' value=$avatar><img src='/avatars/$avatar.png'></label></td>";
-}
-print "</tr></table>";
+
+print "email: ",textfield(
+	-name		=> 'email',
+	-value		=> '',
+	-size		=> 20,
+	-maxlength	=> 40,
+),br;
 
 print "password: ",password_field(
 	-name		=> 'password',
@@ -37,26 +41,40 @@ print submit(
 	-value		=> 'Submit',
 );
 
-my $avatar=param('avatar');
+my $email=param('email');
 my $password=param('password');
 
 print hr;
 
 if($password eq ''){
-	print "enter your password";
-}elsif($avatar eq ''){
-	print "pick your avatar";
-}elsif($password eq $users{$avatar}){
+	print "enter your password";exit;
+}elsif($email eq ''){
+	print "enter your email";exit;
+}elsif($password eq $users{$email}){
+	print "<img src='/avatars/$avatars{$email}.png'>",br;
 	print "weight check-in: ",textfield(
 		-name 	=> 'weight',
 		-value 	=> '',
 		-size	=> 3,
 		-maxlength => 5,
-	);
+	)," lbs";
 }else{
-	print "wrong password, try again.";
+	print "wrong password, try again.";exit;
 }
 		
-
 print end_form;
-#my $sth_users=$dbh->prepare("select email,
+my $weight=param('weight');
+if($weight=~/\d+/){
+	$sth=$dbh->prepare("insert into checkin (weight,email) values (\'$weight\',\'$email\')");
+	$sth->execute();
+}
+
+print "<table border='1'><tr><th>timestamp</th><th>weight</th></tr>";
+$sth=$dbh->prepare("select timestamp,weight from checkin where email=\'$email\' order by timestamp desc limit 5");
+$sth->execute();
+while(my($timestamp,$weight)=$sth->fetchrow_array){
+	print "<tr><td>$timestamp</td><td>$weight</td></tr>";
+}
+print "</table>";
+print hr;
+print '<img src="/cgi-bin/graph.pl?email='.$email.'">';
