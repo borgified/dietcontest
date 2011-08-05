@@ -18,7 +18,7 @@ print "input your email: ",textfield(
 	-size		=> 20,
 	-maxlength	=> 40,
 )," (eg. fwiffo.ofspathiwa\@ingres.com)",br;
-print "pick a password: ",textfield(
+print "pick a password: ",password_field(
 	-name		=> 'password',
 	-value		=> '',
 	-size		=> 20,
