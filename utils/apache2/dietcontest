@@ -1,0 +1,47 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+
+	DocumentRoot /home/jctong/dietcontest/html
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+	<Directory /home/jctong/dietcontest/html>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ /home/jctong/dietcontest/cgi-bin/
+	<Directory "/home/jctong/dietcontest/cgi-bin">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+#
+#	<Directory "/home/jctong/dietcontest/cgi-bin/dashboard">
+#		DirectoryIndex login.pl
+#		AllowOverride Indexes
+#		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+#		AuthType Basic
+#		AuthName "use your Windows credentials to log in"
+#		AuthBasicProvider ldap
+#		AuthzLDAPAuthoritative on
+#		AuthLDAPURL ldap://usrc-dc01:389/ou=Americas,dc=ingres,dc=prv?sAMAccountName?sub?(objectClass=*)
+#		AuthLDAPBindDN "cn=LDAP Account,ou=Admin Accounts,dc=ingres,dc=prv"
+#		AuthLDAPBindPassword ld@ping$ 
+#		require valid-user
+#	</Directory>
+
+
+	ErrorLog ${APACHE_LOG_DIR}/error_dietcontest.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog ${APACHE_LOG_DIR}/access_dietcontest.log combined
+
+</VirtualHost>

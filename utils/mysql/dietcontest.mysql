@@ -1,0 +1,88 @@
+-- MySQL dump 10.13  Distrib 5.1.54, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: dietcontest
+-- ------------------------------------------------------
+-- Server version	5.1.54-1ubuntu4
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `dietcontest`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `dietcontest` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `dietcontest`;
+
+--
+-- Table structure for table `avatars`
+--
+
+DROP TABLE IF EXISTS `avatars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `avatars` (
+  `filename` varchar(24) DEFAULT NULL,
+  `url` text NOT NULL,
+  `used` int(1) NOT NULL,
+  UNIQUE KEY `filename` (`filename`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `avatars`
+--
+
+LOCK TABLES `avatars` WRITE;
+/*!40000 ALTER TABLE `avatars` DISABLE KEYS */;
+INSERT INTO `avatars` VALUES ('AlpineGoat','avatars/AlpineGoat.png',0),('AmericanFoal','avatars/AmericanFoal.png',0),('Antelope','avatars/Antelope.png',0),('ArcticFox','avatars/ArcticFox.png',0),('Armadillo','avatars/Armadillo.png',0),('BabyWhiteTiger','avatars/BabyWhiteTiger.png',0),('BlackSwan','avatars/BlackSwan.png',1),('BlueCow','avatars/BlueCow.png',0),('CampbellDuck','avatars/CampbellDuck.png',0),('Chicken','avatars/Chicken.png',0),('Flamingo','avatars/Flamingo.png',0),('HotPinkPig','avatars/HotPinkPig.png',0),('RubberDuckie','avatars/RubberDuckie.png',0),('Sheep','avatars/Sheep.png',0),('Turkey','avatars/Turkey.png',0),('Turtle','avatars/Turtle.png',0),('WhiteKangaroo','avatars/WhiteKangaroo.png',0),('WhiteKitten','avatars/WhiteKitten.png',0),('WhiteKitty','avatars/WhiteKitty.png',0),('WhiteReindeer','avatars/WhiteReindeer.png',0),('WolfCub','avatars/WolfCub.png',0),('YellowUnicorn','avatars/YellowUnicorn.png',0);
+/*!40000 ALTER TABLE `avatars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `uid` int(2) NOT NULL AUTO_INCREMENT,
+  `avatar` varchar(24) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `weight` int(3) NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'BlackSwan','2011-08-05 01:22:39',0,'juancarlos.tong@ingres.com','asdfjk');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2011-08-04 21:35:00
