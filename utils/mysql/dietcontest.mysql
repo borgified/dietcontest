@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.1.54, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.1.54, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: dietcontest
 -- ------------------------------------------------------
@@ -44,8 +44,32 @@ CREATE TABLE `avatars` (
 
 LOCK TABLES `avatars` WRITE;
 /*!40000 ALTER TABLE `avatars` DISABLE KEYS */;
-INSERT INTO `avatars` VALUES ('AlpineGoat','avatars/AlpineGoat.png',0),('AmericanFoal','avatars/AmericanFoal.png',0),('Antelope','avatars/Antelope.png',0),('ArcticFox','avatars/ArcticFox.png',0),('Armadillo','avatars/Armadillo.png',0),('BabyWhiteTiger','avatars/BabyWhiteTiger.png',0),('BlackSwan','avatars/BlackSwan.png',1),('BlueCow','avatars/BlueCow.png',0),('CampbellDuck','avatars/CampbellDuck.png',0),('Chicken','avatars/Chicken.png',0),('Flamingo','avatars/Flamingo.png',0),('HotPinkPig','avatars/HotPinkPig.png',0),('RubberDuckie','avatars/RubberDuckie.png',0),('Sheep','avatars/Sheep.png',0),('Turkey','avatars/Turkey.png',0),('Turtle','avatars/Turtle.png',0),('WhiteKangaroo','avatars/WhiteKangaroo.png',0),('WhiteKitten','avatars/WhiteKitten.png',0),('WhiteKitty','avatars/WhiteKitty.png',0),('WhiteReindeer','avatars/WhiteReindeer.png',0),('WolfCub','avatars/WolfCub.png',0),('YellowUnicorn','avatars/YellowUnicorn.png',0);
+INSERT INTO `avatars` VALUES ('AlpineGoat','avatars/AlpineGoat.png',0),('AmericanFoal','avatars/AmericanFoal.png',0),('Antelope','avatars/Antelope.png',0),('ArcticFox','avatars/ArcticFox.png',0),('Armadillo','avatars/Armadillo.png',0),('BabyWhiteTiger','avatars/BabyWhiteTiger.png',0),('BlackSwan','avatars/BlackSwan.png',1),('BlueCow','avatars/BlueCow.png',1),('CampbellDuck','avatars/CampbellDuck.png',0),('Chicken','avatars/Chicken.png',0),('Flamingo','avatars/Flamingo.png',0),('HotPinkPig','avatars/HotPinkPig.png',0),('RubberDuckie','avatars/RubberDuckie.png',0),('Sheep','avatars/Sheep.png',0),('Turkey','avatars/Turkey.png',0),('Turtle','avatars/Turtle.png',0),('WhiteKangaroo','avatars/WhiteKangaroo.png',0),('WhiteKitten','avatars/WhiteKitten.png',0),('WhiteKitty','avatars/WhiteKitty.png',0),('WhiteReindeer','avatars/WhiteReindeer.png',0),('WolfCub','avatars/WolfCub.png',0),('YellowUnicorn','avatars/YellowUnicorn.png',0);
 /*!40000 ALTER TABLE `avatars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `checkin`
+--
+
+DROP TABLE IF EXISTS `checkin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checkin` (
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `email` text NOT NULL,
+  `weight` int(3) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `checkin`
+--
+
+LOCK TABLES `checkin` WRITE;
+/*!40000 ALTER TABLE `checkin` DISABLE KEYS */;
+INSERT INTO `checkin` VALUES ('2011-08-05 08:29:33','fwiffo.ofspathiwa@ingres.com',1),('2011-08-05 08:42:42','fwiffo.ofspathiwa@ingres.com',1),('2011-08-05 08:43:11','fwiffo.ofspathiwa@ingres.com',1),('2011-08-05 08:50:22','fwiffo.ofspathiwa@ingres.com',12),('2011-08-05 08:53:26','fwiffo.ofspathiwa@ingres.com',12),('2011-08-05 08:53:29','fwiffo.ofspathiwa@ingres.com',12),('2011-08-05 08:53:30','fwiffo.ofspathiwa@ingres.com',12),('2011-08-05 10:46:07','fwiffo.ofspathiwa@ingres.com',12),('2011-08-05 11:00:52','fwiffo.ofspathiwa@ingres.com',12),('2011-08-05 11:03:23','fwiffo.ofspathiwa@ingres.com',12),('2011-08-05 12:27:35','fwiffo.ofspathiwa@ingres.com',5),('2011-08-05 12:36:24','fwiffo.ofspathiwa@ingres.com',5);
+/*!40000 ALTER TABLE `checkin` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -63,7 +87,7 @@ CREATE TABLE `users` (
   `email` text NOT NULL,
   `password` text NOT NULL,
   KEY `uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +96,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'BlackSwan','2011-08-05 01:22:39',0,'juancarlos.tong@ingres.com','asdfjk');
+INSERT INTO `users` VALUES (1,'BlackSwan','2011-08-05 01:22:39',0,'juancarlos.tong@ingres.com','asdfjk'),(2,'BlueCow','2011-08-05 05:32:30',0,'fwiffo.ofspathiwa@ingres.com','fwiffo');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -85,4 +109,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-08-04 21:35:00
+-- Dump completed on 2011-08-05  5:40:12
