@@ -17,7 +17,7 @@ print "email: ",textfield(
 	-value		=> '',
 	-size		=> 20,
 	-maxlength	=> 40,
-)," (eg. juancarlos.tong\@ingres.com)",br;
+)," (eg. fwiffo.ofspathiwa\@ingres.com)",br;
 print "password: ",textfield(
 	-name		=> 'password',
 	-value		=> '',
