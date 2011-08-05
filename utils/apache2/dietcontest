@@ -1,20 +1,20 @@
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 
-	DocumentRoot /home/jctong/scripts/dietcontest/html
+	DocumentRoot /home/fwiffo/scripts/dietcontest/html
 	<Directory />
 		Options FollowSymLinks
 		AllowOverride None
 	</Directory>
-	<Directory /home/jctong/scripts/dietcontest/html>
+	<Directory /home/fwiffo/scripts/dietcontest/html>
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride None
 		Order allow,deny
 		allow from all
 	</Directory>
 
-	ScriptAlias /cgi-bin/ /home/jctong/scripts/dietcontest/cgi-bin/
-	<Directory "/home/jctong/scripts/dietcontest/cgi-bin">
+	ScriptAlias /cgi-bin/ /home/fwiffo/scripts/dietcontest/cgi-bin/
+	<Directory "/home/fwiffo/scripts/dietcontest/cgi-bin">
 		AllowOverride None
 		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
 		Order allow,deny
