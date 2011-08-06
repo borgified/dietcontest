@@ -21,7 +21,8 @@ $sth=$dbh->prepare("select checkin.timestamp,users.avatar from checkin on checki
 
 
 print header,start_html;
-
+print "<a href='/'><img src='/img/eluder.png'></a>";
+print "this is not implemented yet";
 print "<table border=1>";
 
 foreach my $avatar (@avatars){

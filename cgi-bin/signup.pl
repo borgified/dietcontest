@@ -9,26 +9,29 @@ use DBI;
 my $dbh = DBI->connect('DBI:mysql:dietcontest', 'root', '') 
 	|| die "Could not connect to database: $DBI::errstr";
 
-print header,start_html;
-print h3("sign up form for diet contest 2011");
-print start_form;
-print "input your email: ",textfield(
-	-name		=> 'email',
-	-value		=> '',
-	-size		=> 20,
-	-maxlength	=> 40,
-)," (eg. fwiffo.ofspathiwa\@ingres.com)",br;
-print "pick a password: ",password_field(
-	-name		=> 'password',
-	-value		=> '',
-	-size		=> 20,
-	-maxlength	=> 40,
-),br;
-print submit(
-	-name		=> 'submit_form',
-	-value		=> 'Submit',
-);
-print end_form;
+print header,start_html(-style => { -src => '/style.css'});
+
+print <<HTML;
+<a href="/"><img src="/img/eluder.png"></a>
+<div id="stylized" class="myform">
+<form method="post" action="/cgi-bin/signup.pl" enctype="multipart/form-data">
+<h1>sign up form for diet contest 2011</h1>
+<label>Email
+<span class="small">eg. jack.black\@ingres.com</span>
+</label>
+<input type="text" name="email" id="email" size="20" maxlength="40">
+
+<label>Password
+<span class="small">anything is fine</span>
+</label>
+<input type="password" name="password" id="password" size="20" maxlength="40">
+
+<button type="submit">Sign-up</button>
+<div class="spacer"></div>
+
+</form>
+</div>
+HTML
 
 #get an array of unclaimed avatars
 my @avatars;
