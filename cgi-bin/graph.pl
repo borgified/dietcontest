@@ -12,7 +12,7 @@ $email="fwiffo.ofspathiwa\@ingres.com";
 my $dbh = DBI->connect('DBI:mysql:dietcontest', 'root', '')
     || die "Could not connect to database: $DBI::errstr";
 
-$sth=$dbh->prepare("select timestamp,weight from checkin where email=\'$email\' order by timestamp ");
+my $sth=$dbh->prepare("select timestamp,weight from checkin where email=\'$email\' order by timestamp ");
 $sth->execute();
 my @timestamp;
 my @weight;

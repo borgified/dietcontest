@@ -77,4 +77,5 @@ while(my($timestamp,$weight)=$sth->fetchrow_array){
 }
 print "</table>";
 print hr;
+#print '<img src="/cgi-bin/graph.pl?email='.$email.'&password='.$password.'">';
 print '<img src="/cgi-bin/graph.pl?email='.$email.'">';
