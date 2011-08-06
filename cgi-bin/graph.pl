@@ -3,16 +3,19 @@
 use CGI qw/:standard/;
 use DBI;
 use GD::Graph::lines;
+use Crypt::Lite;
 
 #check in weight
 #graphs to track progress
 
-my $email=param('email');
-$email="fwiffo.ofspathiwa\@ingres.com";
+my $crypt=Crypt::Lite->new;
+my $encrypted=param('a');
+my $email=$crypt->decrypt($encrypted,'secret');
+
 my $dbh = DBI->connect('DBI:mysql:dietcontest', 'root', '')
     || die "Could not connect to database: $DBI::errstr";
 
-my $sth=$dbh->prepare("select timestamp,weight from checkin where email=\'$email\' order by timestamp ");
+my $sth=$dbh->prepare("select timestamp,weight from checkin where email=\'$email\' order by timestamp");
 $sth->execute();
 my @timestamp;
 my @weight;

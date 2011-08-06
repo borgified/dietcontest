@@ -2,6 +2,7 @@
 
 use CGI qw/:standard/;
 use DBI;
+use Crypt::Lite;
 
 #check in weight
 #graphs to track progress
@@ -78,4 +79,6 @@ while(my($timestamp,$weight)=$sth->fetchrow_array){
 print "</table>";
 print hr;
 #print '<img src="/cgi-bin/graph.pl?email='.$email.'&password='.$password.'">';
-print '<img src="/cgi-bin/graph.pl?email='.$email.'">';
+my $crypt=new Crypt::Lite;
+$encrypted=$crypt->encrypt($email,'secret');
+print '<img src="/cgi-bin/graph.pl?a='.$encrypted.'">';
