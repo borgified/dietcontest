@@ -2,15 +2,12 @@
 
 use CGI qw/:standard/;
 use DBI;
-use GD::Graph::lines;
-use Crypt::Lite;
+use MIME::Base64::URLSafe;
+use Chart::Strip;
+use Date::Manip;
 
-#check in weight
-#graphs to track progress
-
-my $crypt=Crypt::Lite->new;
 my $encrypted=param('a');
-my $email=$crypt->decrypt($encrypted,'secret');
+my $email=MIME::Base64::URLSafe::decode($encrypted);
 
 my $dbh = DBI->connect('DBI:mysql:dietcontest', 'root', '')
     || die "Could not connect to database: $DBI::errstr";
@@ -20,24 +17,21 @@ $sth->execute();
 my @timestamp;
 my @weight;
 while(my($timestamp,$weight)=$sth->fetchrow_array){
-    push(@timestamp,$timestamp);
-    push(@weight,$weight);
+	my $unixdate=UnixDate(ParseDate($timestamp),"%s");
+	print "$weight";
+	push @$data, {time => $unixdate, value => $weight};
 }
 
+my $graph = Chart::Strip->new(	title		=> '',
+								x_label		=> '',
+								y_label		=> '',
+								transparent => 0,
+);
 
-my @data = (\@timestamp,\@weight);
-my $graph = GD::Graph::lines->new(600,300);
-$graph->set(
-	x_label		=> '',
-	y_label		=> 'weight',
-	line_type	=> 1,
-	line_width	=> 2,
-) or warn $graph->error;
+$graph->add_data( $data, { label => '', style => 'line' });
 
-my $img = $graph->plot(\@data) or die $graph->error;
 
 binmode STDOUT;
-
 print header("image/png");
-print $img->png;
+print $graph->png;
 
