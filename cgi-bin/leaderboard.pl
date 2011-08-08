@@ -6,7 +6,7 @@ use CGI qw/:standard/;
 
 #enter start & end dates for contest YYYYMMDD
 my $startdate="20110808";
-my $enddate="20111215";
+my $enddate="20111216";
 
 $startdate=~/(\d{4})(\d{2})(\d{2})/;
 my $starty=$1;
