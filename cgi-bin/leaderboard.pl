@@ -3,8 +3,10 @@
 use Date::Calc qw/:all/;
 use DBI;
 use CGI qw/:standard/;
+use Date::Manip;
 
 #enter start & end dates for contest YYYYMMDD
+
 my $startdate="20110808";
 my $enddate="20111216";
 
@@ -34,8 +36,6 @@ while(my($avatar,$email)=$sth->fetchrow_array){
 
 $sth=$dbh->prepare("select checkin.timestamp,users.avatar from checkin on checkin.email = users.email");
 
-
-
 print header,start_html;
 print <<HTML;
 <a href="/"><img src="/img/eluder.png"></a>
@@ -57,7 +57,7 @@ foreach my $avatar (keys(%db)){
 
 
 	print "<tr><td><img src='/avatars/$avatar.png'></td>";
-	my($pmonth,$pdayplusone,$pyear,$pweight)=(0,0,0,0);
+	my($pmonth,$pday,$pyear,$pweight)=(0,0,0,0);
 
 
 	for(my $i=0;$i<$tourney_days;$i++){
@@ -66,22 +66,21 @@ foreach my $avatar (keys(%db)){
 			my($year,$month,$day)=Add_Delta_Days($starty,$startm,$startd,$i);
 			$month=sprintf("%02d",$month);
 			$day=sprintf("%02d",$day);
-			$dayplusone=sprintf("%02d",$day+1);
 
-			$sth=$dbh->prepare("select weight,timestamp from checkin where email=\'$db{$avatar}\' and timestamp < \'$year-$month-$dayplusone 00:00:00\' and timestamp > \'$pyear-$pmonth-$pdayplusone 00:00:00\' order by timestamp desc limit 1");
+			$sth=$dbh->prepare("select weight,timestamp from checkin where email=\'$db{$avatar}\' and timestamp < \'$year-$month-$day 23:59:59\' and timestamp > \'$pyear-$pmonth-$pday 23:59:59\' order by timestamp desc limit 1");
 			$sth->execute();
 
 			my($weight)= $sth->fetchrow_array;
 			
 			if($pweight==0 or $weight==0){
-				print "<td>$pmonth-$pdayplusone-$pyear ... $month-$day-$year</td>";
+				print "<td>$pmonth-$pday-$pyear ... $month-$day-$year</td>";
 			}else{
 				my $percentage=sprintf("%.2f",(($weight-$pweight)/$pweight)*100);
 				#print "<td>$pmonth-$pdayplusone-$pyear ... $month-$day-$year $weight $percentage</td>";
 				print "<td bgcolor='lightblue'>$percentage</td>";
 			}
 			$pmonth=$month;
-			$pdayplusone=$dayplusone;
+			$pday=$day;
 			$pyear=$year;
 			$pweight=$weight;
 
