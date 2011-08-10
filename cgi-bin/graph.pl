@@ -18,7 +18,7 @@ my @timestamp;
 my @weight;
 while(my($timestamp,$weight)=$sth->fetchrow_array){
 	my $unixdate=UnixDate(ParseDate($timestamp),"%s");
-	print "$weight";
+	#print "$weight";
 	push @$data, {time => $unixdate, value => $weight};
 }
 
