@@ -1,12 +1,9 @@
 ##Screenshots
-<img src="https://github.com/downloads/technomancy/leiningen/leiningen-banner.png" alt="Leiningen logo" title="The man himself" align="right" />
 ### Main Page
-<img src="https://github.com/borgified/dietcontest/blob/master/screenshots/Screenshot-3.png" alt="">
-
+<img src="https://github.com/downloads/borgified/dietcontest/Screenshot-3.png">
 
 ### Login Page
-![] (https://github.com/borgified/dietcontest/blob/master/screenshots/Screenshot-4.png)
-
+<img src="https://github.com/downloads/borgified/dietcontest/Screenshot-4.png">
 
 ### Leaderboard
-![] (https://github.com/borgified/dietcontest/blob/master/screenshots/Screenshot-2.png)
+<img src="https://github.com/downloads/borgified/dietcontest/Screenshot-2.png">
