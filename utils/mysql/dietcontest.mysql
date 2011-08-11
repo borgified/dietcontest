@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.1.54, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.1.54, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: dietcontest
 -- ------------------------------------------------------
@@ -39,16 +39,6 @@ CREATE TABLE `avatars` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `avatars`
---
-
-LOCK TABLES `avatars` WRITE;
-/*!40000 ALTER TABLE `avatars` DISABLE KEYS */;
-INSERT INTO `avatars` VALUES ('AlpineGoat','avatars/AlpineGoat.png',0),('AmericanFoal','avatars/AmericanFoal.png',0),('Antelope','avatars/Antelope.png',0),('ArcticFox','avatars/ArcticFox.png',0),('Armadillo','avatars/Armadillo.png',0),('BabyWhiteTiger','avatars/BabyWhiteTiger.png',1),('BlackSwan','avatars/BlackSwan.png',1),('BlueCow','avatars/BlueCow.png',1),('CampbellDuck','avatars/CampbellDuck.png',0),('Chicken','avatars/Chicken.png',0),('Flamingo','avatars/Flamingo.png',0),('HotPinkPig','avatars/HotPinkPig.png',0),('RubberDuckie','avatars/RubberDuckie.png',0),('Sheep','avatars/Sheep.png',1),('Turkey','avatars/Turkey.png',0),('Turtle','avatars/Turtle.png',1),('WhiteKangaroo','avatars/WhiteKangaroo.png',0),('WhiteKitten','avatars/WhiteKitten.png',1),('WhiteKitty','avatars/WhiteKitty.png',1),('WhiteReindeer','avatars/WhiteReindeer.png',0),('WolfCub','avatars/WolfCub.png',0),('YellowUnicorn','avatars/YellowUnicorn.png',0);
-/*!40000 ALTER TABLE `avatars` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `checkin`
 --
 
@@ -61,16 +51,6 @@ CREATE TABLE `checkin` (
   `weight` float NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `checkin`
---
-
-LOCK TABLES `checkin` WRITE;
-/*!40000 ALTER TABLE `checkin` DISABLE KEYS */;
-INSERT INTO `checkin` VALUES ('2011-08-22 08:29:33','fwiffo.ofspathiwa@ingres.com',99),('2011-08-22 08:42:42','fwiffo.ofspathiwa@ingres.com',5),('2011-08-22 08:43:11','fwiffo.ofspathiwa@ingres.com',13),('2011-08-22 08:50:22','fwiffo.ofspathiwa@ingres.com',11.23),('2011-09-06 08:53:26','fwiffo.ofspathiwa@ingres.com',15),('2011-09-04 08:53:29','fwiffo.ofspathiwa@ingres.com',11),('2011-08-05 08:53:30','fwiffo.ofspathiwa@ingres.com',9.99),('2011-08-05 10:46:07','fwiffo.ofspathiwa@ingres.com',9.99),('2011-08-05 11:00:52','fwiffo.ofspathiwa@ingres.com',9.99),('2011-08-05 11:03:23','fwiffo.ofspathiwa@ingres.com',9.99),('2011-08-05 12:27:35','fwiffo.ofspathiwa@ingres.com',5),('2011-08-05 12:36:24','fwiffo.ofspathiwa@ingres.com',5),('2011-08-06 05:52:00','newuser@ingres.com',2),('2011-08-06 05:52:05','newuser@ingres.com',3),('2011-08-06 05:52:10','newuser@ingres.com',4),('2011-08-06 05:52:14','newuser@ingres.com',2),('2011-08-06 05:59:10','juancarlos.tong@ingres.com',9.99),('2011-08-06 05:59:15','juancarlos.tong@ingres.com',9.99),('2011-08-06 05:59:19','juancarlos.tong@ingres.com',9.99),('2011-08-06 05:59:27','juancarlos.tong@ingres.com',9.99),('2011-08-06 05:59:33','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:18:48','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:18:50','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:19:54','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:21:30','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:22:06','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:22:18','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:22:44','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:22:47','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:22:52','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:22:56','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:23:05','juancarlos.tong@ingres.com',9.99),('2011-08-06 06:23:12','juancarlos.tong@ingres.com',1),('2011-08-06 06:23:13','juancarlos.tong@ingres.com',1),('2011-08-06 06:23:14','juancarlos.tong@ingres.com',1),('2011-08-06 08:59:03','fwiffo.ofspathiwa@ingres.com',9.99),('2011-08-06 09:00:27','fwiffo.ofspathiwa@ingres.com',9.99),('2011-08-06 09:00:30','fwiffo.ofspathiwa@ingres.com',9.99),('2011-08-06 10:26:40','jack.black@ingres.com',9.99),('2011-08-06 10:26:47','jack.black@ingres.com',9.99),('2011-08-06 10:27:23','jack.black@ingres.com',9.99),('2011-09-06 10:27:36','jack.black@ingres.com',10),('2011-09-20 10:29:10','jack.black@ingres.com',9.99),('2011-08-06 10:30:10','jack.black@ingres.com',9.99),('2011-08-06 10:30:17','jack.black@ingres.com',9.99),('2011-08-06 10:31:02','jack.black@ingres.com',52.4),('2011-08-06 10:31:05','jack.black@ingres.com',52.4),('2011-08-06 10:31:12','jack.black@ingres.com',32.4),('2011-08-06 10:31:17','jack.black@ingres.com',12.4),('2011-08-06 10:31:22','jack.black@ingres.com',72.4),('2011-08-06 10:31:27','jack.black@ingres.com',72.25),('2011-08-06 10:33:07','jack.black@ingres.com',72.25),('2011-08-06 10:33:22','jack.black@ingres.com',72.25),('2011-08-06 10:33:22','jack.black@ingres.com',72.25),('2011-08-06 10:33:23','jack.black@ingres.com',72.25),('2011-08-06 10:33:23','jack.black@ingres.com',72.25),('2011-08-06 10:33:56','jack.black@ingres.com',72.25),('2011-08-06 10:35:43','jack.black@ingres.com',72.25),('2011-08-06 10:37:29','jack.black@ingres.com',72.25),('2011-08-06 10:37:38','jack.black@ingres.com',72.25),('2011-08-06 10:37:41','jack.black@ingres.com',72.25),('2011-08-06 10:38:20','jack.black@ingres.com',72.25),('2011-08-06 10:38:59','jack.black@ingres.com',72.25),('2011-08-06 10:41:12','jack.black@ingres.com',72.25),('2011-08-06 10:41:52','jack.black@ingres.com',72.25),('2011-08-06 10:42:52','jack.black@ingres.com',72.25),('2011-08-06 10:42:53','jack.black@ingres.com',72.25),('2011-08-06 10:43:39','jack.black@ingres.com',72.25),('2011-08-06 10:43:50','jack.black@ingres.com',72.25),('2011-08-06 10:44:14','jack.black@ingres.com',72.25),('2011-08-06 10:46:14','jack.black@ingres.com',72.25),('2011-08-06 10:56:42','jack.black@ingres.com',15),('2011-08-06 10:56:49','jack.black@ingres.com',150),('2011-08-06 11:18:20','beta.tester@ingres.com',300),('2011-08-06 11:18:26','beta.tester@ingres.com',302),('2011-08-06 11:18:31','beta.tester@ingres.com',300),('2011-08-06 11:18:36','beta.tester@ingres.com',315),('2011-08-06 11:18:41','beta.tester@ingres.com',315.23),('2011-08-06 11:18:56','beta.tester@ingres.com',310.55),('2011-08-06 11:35:30','tester.a@ingres.com',150),('2011-08-06 11:35:35','tester.a@ingres.com',1650),('2011-08-06 11:35:39','tester.a@ingres.com',50),('2011-08-06 11:35:45','tester.a@ingres.com',120),('2011-08-06 11:35:54','tester.a@ingres.com',135.255),('2011-08-07 01:45:48','hello@ingres.com',150),('2011-08-07 01:45:58','hello@ingres.com',165),('2011-08-07 01:46:05','hello@ingres.com',155),('2011-08-07 01:46:12','hello@ingres.com',170),('2011-08-07 23:38:01','fwiffo.ofspathiwa@ingres.com',12);
-/*!40000 ALTER TABLE `checkin` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -86,19 +66,10 @@ CREATE TABLE `users` (
   `weight` int(3) NOT NULL,
   `email` text NOT NULL,
   `password` text NOT NULL,
+  `nickname` text NOT NULL,
   KEY `uid` (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'BlackSwan','2011-08-05 01:22:39',0,'juancarlos.tong@ingres.com','asdfjk'),(2,'BlueCow','2011-08-05 05:32:30',0,'fwiffo.ofspathiwa@ingres.com','fwiffo'),(3,'WhiteKitty','2011-08-06 05:50:04',0,'newuser@ingres.com','asdfjk'),(4,'WhiteKitten','2011-08-06 10:06:36',0,'jack.black@ingres.com','asdfjk'),(5,'Sheep','2011-08-06 11:18:02',0,'beta.tester@ingres.com','asdfjk'),(6,'BabyWhiteTiger','2011-08-06 11:35:06',0,'tester.a@ingres.com','asdfjk'),(7,'Turtle','2011-08-07 01:45:10',0,'hello@ingres.com','asdfjk');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -109,4 +80,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-08-07 19:28:54
+-- Dump completed on 2011-08-11 16:06:37

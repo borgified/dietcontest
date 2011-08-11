@@ -1,1 +1,1 @@
-mysqldump -uroot --database dietcontest > dietcontest.mysql
+mysqldump -d -uroot --database dietcontest > dietcontest.mysql
