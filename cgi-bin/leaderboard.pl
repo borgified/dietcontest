@@ -26,12 +26,13 @@ my $dbh = DBI->connect('DBI:mysql:dietcontest', 'root', '')
 
 my $tourney_days=Delta_Days($starty,$startm,$startd,$endy,$endm,$endd);
 
-my $sth=$dbh->prepare("select avatar,email from users");
+my $sth=$dbh->prepare("select avatar,email,nickname from users");
 $sth->execute;
 my @avatars;
-my %db;
-while(my($avatar,$email)=$sth->fetchrow_array){
+my(%db,%nickname);
+while(my($avatar,$email,$nickname)=$sth->fetchrow_array){
 	$db{$avatar}=$email;
+	$nickname{$avatar}=$nickname;
 }
 
 $sth=$dbh->prepare("select checkin.timestamp,users.avatar from checkin on checkin.email = users.email");
@@ -56,8 +57,8 @@ print "<table border=1>";
 foreach my $avatar (keys(%db)){
 
 
-	print "<tr><td><img src='/avatars/$avatar.png'></td>";
-	my($pmonth,$pday,$pyear,$pweight)=(0,0,0,0);
+	print "<tr><td><img src='/avatars/$avatar.png'>$nickname{$avatar}</td>";
+	my($pmonth,$pday,$pyear,$pweight)=(0) x 4;
 
 
 	for(my $i=0;$i<$tourney_days;$i++){
@@ -67,12 +68,12 @@ foreach my $avatar (keys(%db)){
 			$month=sprintf("%02d",$month);
 			$day=sprintf("%02d",$day);
 
-			$sth=$dbh->prepare("select weight,timestamp from checkin where email=\'$db{$avatar}\' and timestamp < \'$year-$month-$day 23:59:59\' and timestamp > \'$pyear-$pmonth-$pday 23:59:59\' order by timestamp desc limit 1");
+			$sth=$dbh->prepare("select weight from checkin where email=\'$db{$avatar}\' and timestamp < \'$year-$month-$day 23:59:59\' and timestamp > \'$pyear-$pmonth-$pday 23:59:59\' order by timestamp desc limit 1");
 			$sth->execute();
 
 			my($weight)= $sth->fetchrow_array;
 			
-			if($pweight==0 or $weight==0){
+			if(!defined($weight) or !defined($pweight) or $pweight == 0){
 				print "<td>$pmonth-$pday-$pyear ... $month-$day-$year</td>";
 			}else{
 				my $percentage=sprintf("%.2f",(($weight-$pweight)/$pweight)*100);
