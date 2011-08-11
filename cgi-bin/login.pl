@@ -10,13 +10,14 @@ use MIME::Base64::URLSafe;
 my $dbh = DBI->connect('DBI:mysql:dietcontest', 'root', '') 
 	|| die "Could not connect to database: $DBI::errstr";
 
-my $sth=$dbh->prepare("select email,password,avatar from users");
+my $sth=$dbh->prepare("select email,password,avatar,nickname from users");
 $sth->execute();
-my(%users,%avatars);
+my(%users,%avatars,%nickname);
 
-while(my($email,$password,$avatar)=$sth->fetchrow_array){
+while(my($email,$password,$avatar,$nickname)=$sth->fetchrow_array){
 	$users{$email}=$password;
 	$avatars{$email}=$avatar;
+	$nickname{$email}=$nickname;
 }
 
 print header,start_html(-style => { -src => '/style.css'});
@@ -66,6 +67,15 @@ if($password eq ''){
 		-size	=> 8,
 		-maxlength => 8,
 	);
+	print "<div class='spacer'></div>";
+	print "<label>nickname</label>
+	<span class='small'></span>",textfield(
+		-id		=> 'email',
+		-name 	=> 'nickname',
+		-value 	=> $nickname{$email},
+		-size	=> 20,
+		-maxlength => 20,
+	);
 }else{
 	print "wrong password, try again.";exit;
 }
@@ -78,6 +88,11 @@ print "</div>";
 my $weight=param('weight');
 if($weight=~/\d+/){
 	$sth=$dbh->prepare("insert into checkin (weight,email) values (\'$weight\',\'$email\')");
+	$sth->execute();
+}
+my $nickname=param('nickname');
+if($nickname ne $nickname{$email}){
+	$sth=$dbh->prepare("update users set nickname = \'$nickname\' where email = \'$email\'");
 	$sth->execute();
 }
 
