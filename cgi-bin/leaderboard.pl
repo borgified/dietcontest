@@ -28,7 +28,6 @@ my $tourney_days=Delta_Days($starty,$startm,$startd,$endy,$endm,$endd);
 
 my $sth=$dbh->prepare("select avatar,email,nickname from users");
 $sth->execute;
-my @avatars;
 my(%db,%nickname);
 while(my($avatar,$email,$nickname)=$sth->fetchrow_array){
 	$db{$avatar}=$email;
@@ -54,39 +53,83 @@ HTML
 
 print "<table border=1>";
 
-foreach my $avatar (keys(%db)){
+my @avatars=keys(%db);
+
+my @sorted=&orderedAvatars(0,\@avatars);
+&orderedAvatars(1,\@sorted);
+
+sub orderedAvatars{
+#gotta run through all the same logic once to get the percentage result for each user,
+#then we can sort the avatars from biggest weight loss to least.
+#we're gonna sort by the time period that we are currently in. ie. there may be diff leaders
+#in each time period, but we're only gonna sort by the current time period.
+
+	my($printflag)=shift(@_);
+	my($arrayOfAvatars)=shift(@_);
+	my %output;
+
+	foreach my $avatar (@$arrayOfAvatars){
 
 
-	print "<tr><td><img src='/avatars/$avatar.png'>$nickname{$avatar}</td>";
-	my($pmonth,$pday,$pyear,$pweight)=(0) x 4;
+		$printflag && print "<tr><td><img src='/avatars/$avatar.png'>$nickname{$avatar}</td>";
+		my($pmonth,$pday,$pyear,$pweight)=(0) x 4;
 
 
-	for(my $i=0;$i<$tourney_days;$i++){
-		if($i%14 == 0){
+		for(my $i=0;$i<$tourney_days;$i++){
+			if($i%14 == 0){
 
-			my($year,$month,$day)=Add_Delta_Days($starty,$startm,$startd,$i);
-			$month=sprintf("%02d",$month);
-			$day=sprintf("%02d",$day);
+				my($year,$month,$day)=Add_Delta_Days($starty,$startm,$startd,$i);
+				$month=sprintf("%02d",$month);
+				$day=sprintf("%02d",$day);
 
-			$sth=$dbh->prepare("select weight from checkin where email=\'$db{$avatar}\' and timestamp < \'$year-$month-$day 23:59:59\' and timestamp > \'$pyear-$pmonth-$pday 23:59:59\' order by timestamp desc limit 1");
-			$sth->execute();
+				$sth=$dbh->prepare("select weight from checkin where email=\'$db{$avatar}\' and timestamp < \'$year-$month-$day 23:59:59\' and timestamp > \'$pyear-$pmonth-$pday 23:59:59\' order by timestamp desc limit 1");
+				$sth->execute();
 
-			my($weight)= $sth->fetchrow_array;
+				my($weight)= $sth->fetchrow_array;
 			
-			if(!defined($weight) or !defined($pweight) or $pweight == 0){
-				print "<td>$pmonth-$pday-$pyear ... $month-$day-$year</td>";
-			}else{
-				my $percentage=sprintf("%.2f",(($weight-$pweight)/$pweight)*100);
-				#print "<td>$pmonth-$pdayplusone-$pyear ... $month-$day-$year $weight $percentage</td>";
-				print "<td bgcolor='lightblue'>$percentage</td>";
-			}
-			$pmonth=$month;
-			$pday=$day;
-			$pyear=$year;
-			$pweight=$weight;
+				if(!defined($weight) or !defined($pweight) or $pweight == 0){
+					$printflag && print "<td>$pmonth-$pday-$pyear ... $month-$day-$year</td>";
 
+#save placeholders for those who didnt check in (no percentage data)
+					my $lower;
+					if($pyear==0){
+						$lower=0;
+					}else{
+						$lower = Date_to_Days($pyear,$pmonth,$pday);
+					}
+					my $upper = Date_to_Days($year,$month,$day);
+					my ($tyear,$tmonth,$tday)=Today();
+					my $date = Date_to_Days($tyear,$tmonth,$tday);
+					if(($date >= $lower) && ($date <= $upper)){
+						$output{$avatar}=1000; #just assign some big number so they end up at the bottom of the list (assuming no one is going to increase 1000% of their weight...)
+					}
+
+
+				}else{
+					my $percentage=sprintf("%.2f",(($weight-$pweight)/$pweight)*100);
+					$printflag && print "<td bgcolor='lightblue'>$percentage</td>";
+
+#save percentage data only for the time period that we are currently in now
+					my $lower = Date_to_Days($pyear,$pmonth,$pday);
+					my $upper = Date_to_Days($year,$month,$day);
+					my ($tyear,$tmonth,$tday)=Today();
+					my $date = Date_to_Days($tyear,$tmonth,$tday);
+					if(($date >= $lower) && ($date <= $upper)){
+						$output{$avatar}=$percentage;
+					}
+				}
+				$pmonth=$month;
+				$pday=$day;
+				$pyear=$year;
+				$pweight=$weight;
+
+			}
 		}
+		$printflag && print "</tr>";
 	}
-	print "</tr>";
-}
+my @sorted = sort { $output{$a} <=> $output{$b} } keys %output;
+return @sorted;
+
+} #end sub orderedAvatars
+
 print "</table>";
