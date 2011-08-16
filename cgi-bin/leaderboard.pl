@@ -45,9 +45,9 @@ print <<HTML;
 for example: 
 
 if the last check-in for (8-09-2011 to 8-22-2011) is 100
-	and the last check-in for (8-23-2011 to 9-5-2011) is 105, 
+	and the last check-in for (8-23-2011 to 9-5-2011) is 95, 
 then
-	the formula is: (100-105)/100 = -5 percent
+	the formula is: (95-100)/100 = -5 percent
 
 HTML
 
