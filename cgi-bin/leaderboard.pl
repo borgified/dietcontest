@@ -100,7 +100,7 @@ sub orderedAvatars{
 					my $upper = Date_to_Days($year,$month,$day);
 					my ($tyear,$tmonth,$tday)=Today();
 					my $date = Date_to_Days($tyear,$tmonth,$tday);
-					if(($date >= $lower) && ($date <= $upper)){
+					if(($date > $lower) && ($date <= $upper)){
 						$output{$avatar}=1000; #just assign some big number so they end up at the bottom of the list (assuming no one is going to increase 1000% of their weight...)
 					}
 
