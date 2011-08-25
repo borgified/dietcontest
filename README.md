@@ -15,7 +15,7 @@
 `sudo apt-get install apache2 mysql-server phpmyadmin git-core`
 
 2. and these perl modules:
-`sudo apt-get install libmime-base64-urlsafe-perl libchart-strip-perl libdate-manip-perl libdate-calc-perl`
+`sudo apt-get install libmime-base64-urlsafe-perl libchart-strip-perl`
 
 3. then make a user named "fwiffo" (or alternatively you can modify the apache config files to point to the right directories)
 
